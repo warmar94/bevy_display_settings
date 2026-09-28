@@ -1,0 +1,76 @@
+[package]
+name = "bevy_display_settings"
+version = "0.1.0"
+edition = "2021"
+# Bevy 0.19's own minimum.
+rust-version = "1.95"
+description = "UI-agnostic display and renderer settings for Bevy: DX12/Vulkan choice before startup with a restart helper, windowed/borderless/fullscreen, resolution list, vsync, a keep-or-revert countdown, a windowed-size clamp, diagnostics and a safe settings file."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/warmar94/bevy_display_settings"
+readme = "README.md"
+keywords = ["bevy", "settings", "display", "graphics", "window"]
+categories = ["game-development"]
+# Not part of the published package.
+exclude = ["NOTES.md", "docs/", "/target"]
+
+[features]
+default = ["render", "shadows"]
+# `RendererChoice::render_plugin` / `wgpu_settings`: build the `RenderPlugin` for the chosen
+# backend. Without it the choice is still made; apply it to your own `WgpuSettings`.
+render = ["dep:bevy_render"]
+# The `shadows` setting switches shadow maps on every `DirectionalLight`. Without it the field is
+# kept and saved, but nothing applies it.
+shadows = ["dep:bevy_light"]
+
+# Bevy is pinned EXACTLY and only its sub-crates are used, without default features: the crate adds
+# no Bevy feature a game did not ask for, and a game on Bevy 0.19.0 ends up with ONE Bevy.
+[dependencies]
+bevy_app = { version = "=0.19.0", default-features = false, features = ["std"] }
+bevy_ecs = { version = "=0.19.0", default-features = false, features = ["std"] }
+bevy_time = { version = "=0.19.0", default-features = false, features = ["std"] }
+bevy_window = { version = "=0.19.0", default-features = false, features = ["std"] }
+bevy_render = { version = "=0.19.0", default-features = false, optional = true }
+bevy_light = { version = "=0.19.0", default-features = false, optional = true }
+# The settings file: RON through serde.
+serde = { version = "1", default-features = false, features = ["std", "derive"] }
+ron = "0.12"
+# Bevy's logging goes through `tracing`; its subscriber (LogPlugin) picks these messages up.
+tracing = { version = "0.1", default-features = false, features = ["std"] }
+
+[dev-dependencies]
+# Tests run headless on MinimalPlugins; the examples open a real window with a small 3D scene and
+# a text readout.
+bevy = { version = "=0.19.0", default-features = false, features = [
+    "std",
+    "async_executor",
+    "multi_threaded",
+    "bevy_log",
+    "bevy_asset",
+    "bevy_window",
+    "bevy_winit",
+    "keyboard",
+    "x11",
+    "bevy_render",
+    "bevy_core_pipeline",
+    "bevy_pbr",
+    "bevy_light",
+    "bevy_ui",
+    "bevy_ui_render",
+    "bevy_text",
+    "default_font",
+    "tonemapping_luts",
+    "ktx2",
+    "zstd_rust",
+] }
+serde = { version = "1", features = ["derive"] }
+
+[[example]]
+name = "quick_start"
+required-features = ["render", "shadows"]
+
+[[example]]
+name = "renderer_select"
+required-features = ["render"]
+
+[package.metadata.docs.rs]
+all-features = true
