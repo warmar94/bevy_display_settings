@@ -2,7 +2,7 @@
 
 [![License: MIT OR Apache-2.0](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg)](#license)
 [![CI](https://github.com/warmar94/bevy_display_settings/actions/workflows/ci.yml/badge.svg)](https://github.com/warmar94/bevy_display_settings/actions/workflows/ci.yml)
-[![Bevy 0.19.0](https://img.shields.io/badge/Bevy-0.19.0-informational)](https://bevyengine.org)
+[![Bevy 0.20.0](https://img.shields.io/badge/Bevy-0.20.0-informational)](https://bevyengine.org)
 
 Safe, **UI-agnostic display and renderer settings for [Bevy](https://bevyengine.org)**: the logic
 behind a game's graphics menu, without the menu.
@@ -75,9 +75,9 @@ Your game draws the menu with whatever UI it uses. It sends requests (`ApplyDisp
 
 ```toml
 [dependencies]
-bevy = "0.19.0"
-bevy_display_settings = { git = "https://github.com/warmar94/bevy_display_settings", tag = "v0.1.0" }
-# or, once published: bevy_display_settings = "0.1"
+bevy = "0.20.0"
+bevy_display_settings = { git = "https://github.com/warmar94/bevy_display_settings", tag = "v0.2.0" }
+# or, once published: bevy_display_settings = "0.2"
 ```
 
 ```rust,no_run
@@ -538,9 +538,10 @@ With `--no-default-features` the crate needs only `bevy_app`, `bevy_ecs`, `bevy_
 
 | bevy_display_settings | Bevy | Rust |
 |---|---|---|
+| 0.2 | 0.20.0 | 1.97.1+ |
 | 0.1 | 0.19.0 | 1.95+ |
 
-All Bevy crates are pinned to exactly `=0.19.0` with no default features, so the crate adds no
+All Bevy crates are pinned to exactly `=0.20.0` with no default features, so the crate adds no
 Bevy feature your game did not ask for and your game keeps one Bevy.
 
 ## Examples
