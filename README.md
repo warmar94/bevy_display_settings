@@ -77,7 +77,7 @@ Your game draws the menu with whatever UI it uses. It sends requests (`ApplyDisp
 [dependencies]
 bevy = "0.20.0"
 bevy_display_settings = { git = "https://github.com/warmar94/bevy_display_settings", tag = "v0.2.0" }
-# or, once published: bevy_display_settings = "0.2"
+# or from crates.io: bevy_display_settings = "0.2.0"
 ```
 
 ```rust,no_run
